@@ -10212,9 +10212,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\odyss\\Desktop\\HITW\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.csproj",
-      "projectName": "CollaborativeCatalogue.Presentation",
-      "projectPath": "C:\\Users\\odyss\\Desktop\\HITW\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.csproj",
+      "projectUniqueName": "C:\\Users\\odyss\\Desktop\\HITW\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.Site.csproj",
+      "projectName": "CollaborativeCatalogue.Presentation.Site",
+      "projectPath": "C:\\Users\\odyss\\Desktop\\HITW\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.Site.csproj",
       "packagesPath": "C:\\Users\\odyss\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\odyss\\Desktop\\HITW\\Presentation\\CollaborativeCatalogue.Presentation\\obj\\",
       "projectStyle": "PackageReference",

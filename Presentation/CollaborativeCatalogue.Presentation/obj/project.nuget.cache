@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7d43pMb6P6XXO9psoUcvGGHGDfM3DurbAuhpuUbO1CvOLi5V6Bw6EQq4q33JTT+84f+EDjc7SNO4tYE+gCi3Vw==",
+  "dgSpecHash": "fe1V8BufK5y1m/ygQ32NZSqfgOVa3qGY/lAvH/uDG+3/taqj4WPr3W8vp1UjT5IGzr0gs5etFAPwpV6XdhE7mg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\odyss\\Desktop\\HITW\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.csproj",
+  "projectFilePath": "C:\\Users\\odyss\\Desktop\\HITW\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.Site.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\odyss\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\odyss\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

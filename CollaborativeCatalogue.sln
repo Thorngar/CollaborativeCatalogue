@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{4556CB9E-4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{023579FC-AB13-4AD0-AEF0-4AC1C931C9D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollaborativeCatalogue.Presentation", "Presentation\CollaborativeCatalogue.Presentation\CollaborativeCatalogue.Presentation.csproj", "{8B73060E-83D1-4B79-855D-80819AF435DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollaborativeCatalogue.Presentation", "Presentation\CollaborativeCatalogue.Presentation\CollaborativeCatalogue.Presentation.Site.csproj", "{8B73060E-83D1-4B79-855D-80819AF435DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollaborativeCatalogue.Data", "Data\CollaborativeCatalogue.Data\CollaborativeCatalogue.Data.csproj", "{1C4861FA-6AB8-411D-9BBE-67140F62C7CE}"
 EndProject

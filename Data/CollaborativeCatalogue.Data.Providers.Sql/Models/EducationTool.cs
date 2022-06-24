@@ -13,7 +13,8 @@ namespace CollaborativeCatalogue.Data.Providers.Sql.Models
         public string ToolType { get; set; }
         public int MinAge { get; set; }
         public int MaxAge { get; set; }
-        public int Duration { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public double Price { get; set; }
     }
 }

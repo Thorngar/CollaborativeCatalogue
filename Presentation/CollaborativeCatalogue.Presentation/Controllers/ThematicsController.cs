@@ -8,6 +8,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
     public class ThematicsController : ControllerBase
     {
         private readonly CollaborativeCatalogueDbContext collaborativeCatalogueDbContext;
+
         public ThematicsController(CollaborativeCatalogueDbContext collaborativeCatalogueDbContext)
         {
             this.collaborativeCatalogueDbContext = collaborativeCatalogueDbContext;

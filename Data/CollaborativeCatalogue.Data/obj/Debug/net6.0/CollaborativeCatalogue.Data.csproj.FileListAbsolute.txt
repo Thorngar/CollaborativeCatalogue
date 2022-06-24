@@ -10,3 +10,15 @@ C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatal
 C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\refint\CollaborativeCatalogue.Data.dll
 C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.pdb
 C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\ref\CollaborativeCatalogue.Data.dll
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\bin\Debug\net6.0\CollaborativeCatalogue.Data.deps.json
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\bin\Debug\net6.0\CollaborativeCatalogue.Data.dll
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\bin\Debug\net6.0\CollaborativeCatalogue.Data.pdb
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.csproj.AssemblyReference.cache
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.AssemblyInfoInputs.cache
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.AssemblyInfo.cs
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.csproj.CoreCompileInputs.cache
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.dll
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\refint\CollaborativeCatalogue.Data.dll
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.pdb
+C:\Users\odyss\Desktop\HITW\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\ref\CollaborativeCatalogue.Data.dll

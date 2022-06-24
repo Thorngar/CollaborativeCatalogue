@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj": {}
+    "C:\\Users\\odyss\\Desktop\\HITW\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj": {
+    "C:\\Users\\odyss\\Desktop\\HITW\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj",
+        "projectUniqueName": "C:\\Users\\odyss\\Desktop\\HITW\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj",
         "projectName": "CollaborativeCatalogue.Data",
-        "projectPath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj",
-        "packagesPath": "C:\\Users\\s_dummy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\obj\\",
+        "projectPath": "C:\\Users\\odyss\\Desktop\\HITW\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj",
+        "packagesPath": "C:\\Users\\odyss\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\odyss\\Desktop\\HITW\\Data\\CollaborativeCatalogue.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\s_dummy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\odyss\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,8 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nugget.org": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {

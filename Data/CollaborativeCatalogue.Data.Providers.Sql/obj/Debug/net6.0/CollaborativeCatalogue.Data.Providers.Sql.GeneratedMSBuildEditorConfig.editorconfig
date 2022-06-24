@@ -7,4 +7,4 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CollaborativeCatalogue.Data.Providers.Sql
-build_property.ProjectDir = C:\Users\s_dummy\Desktop\HITW\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data.Providers.Sql\
+build_property.ProjectDir = C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data.Providers.Sql\

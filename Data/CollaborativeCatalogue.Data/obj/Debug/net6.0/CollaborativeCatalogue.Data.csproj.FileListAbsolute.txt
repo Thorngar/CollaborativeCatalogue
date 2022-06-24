@@ -1,0 +1,12 @@
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\bin\Debug\net6.0\CollaborativeCatalogue.Data.deps.json
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\bin\Debug\net6.0\CollaborativeCatalogue.Data.dll
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\bin\Debug\net6.0\CollaborativeCatalogue.Data.pdb
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.csproj.AssemblyReference.cache
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.AssemblyInfoInputs.cache
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.AssemblyInfo.cs
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.csproj.CoreCompileInputs.cache
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.dll
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\refint\CollaborativeCatalogue.Data.dll
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\CollaborativeCatalogue.Data.pdb
+C:\Users\s_dummy\Documents\GitHub\CollaborativeCatalogue\Data\CollaborativeCatalogue.Data\obj\Debug\net6.0\ref\CollaborativeCatalogue.Data.dll

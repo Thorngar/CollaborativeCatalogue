@@ -1564,11 +1564,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\s_dummy\\Desktop\\HITW\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data.Providers.Sql\\CollaborativeCatalogue.Data.Providers.Sql.csproj",
+      "projectUniqueName": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data.Providers.Sql\\CollaborativeCatalogue.Data.Providers.Sql.csproj",
       "projectName": "CollaborativeCatalogue.Data.Providers.Sql",
-      "projectPath": "C:\\Users\\s_dummy\\Desktop\\HITW\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data.Providers.Sql\\CollaborativeCatalogue.Data.Providers.Sql.csproj",
+      "projectPath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data.Providers.Sql\\CollaborativeCatalogue.Data.Providers.Sql.csproj",
       "packagesPath": "C:\\Users\\s_dummy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\s_dummy\\Desktop\\HITW\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data.Providers.Sql\\obj\\",
+      "outputPath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data.Providers.Sql\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1590,8 +1590,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\s_dummy\\Desktop\\HITW\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj": {
-              "projectPath": "C:\\Users\\s_dummy\\Desktop\\HITW\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj"
+            "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj": {
+              "projectPath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Data\\CollaborativeCatalogue.Data\\CollaborativeCatalogue.Data.csproj"
             }
           }
         }

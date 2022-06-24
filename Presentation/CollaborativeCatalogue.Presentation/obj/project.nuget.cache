@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yynaZERJ5oaYs8QY5WrHjzW7edjGpRWlI3Rt+olP8D9yjlPgtRBhFtXOSZvw4w0eUhEtEk74vMY6iQbxKvrP4w==",
+  "dgSpecHash": "zd7qRJ8XxMoA3x/+R5Kgn8lgN1zRmwX1uQpNh6jJHu0DOzABCW3irm5wRdmjaxeTTtxbJc9CUWGPTwr/yNcVBQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\s_dummy\\Desktop\\HITW\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.csproj",
+  "projectFilePath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\s_dummy\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\s_dummy\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

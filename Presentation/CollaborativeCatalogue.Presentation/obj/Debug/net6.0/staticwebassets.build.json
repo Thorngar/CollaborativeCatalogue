@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "oNvxG9e5ZcZ3k/cCeGnP8cNMnSJZk7Jm9UtdWkl7vMc=",
-  "Source": "CollaborativeCatalogue.Presentation",
-  "BasePath": "_content/CollaborativeCatalogue.Presentation",
+  "Hash": "cVkpiYMCUP4MzsNgdFZyG+To/8qXnWjK3Agf14QYWDM=",
+  "Source": "CollaborativeCatalogue.Presentation.Site",
+  "BasePath": "_content/CollaborativeCatalogue.Presentation.Site",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

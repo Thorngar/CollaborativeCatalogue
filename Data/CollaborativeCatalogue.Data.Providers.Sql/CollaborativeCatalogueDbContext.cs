@@ -8,5 +8,7 @@ namespace CollaborativeCatalogue.Data.Providers.Sql
         public CollaborativeCatalogueDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<EducationTool> EducationTools { get; set; }
     }
 }

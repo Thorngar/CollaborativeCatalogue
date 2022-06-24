@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ph7TQj8dA+3UMWlBlSBwlZD0iSB2qDVlONsk/wXMi0a5pkaqEx9Ixs/ptmvorvxZcqXNdxL5kFBhIqpg9XmQrg==",
+  "dgSpecHash": "ZzM+Uj3+vX7CLD6NOk8tAN6z/ibM11sSApDK1+EOPHFe+PrYFUJANB8PGynQoJMJGVIDKcuotM+vLL2mBlKxsg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.csproj",
+  "projectFilePath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.Site.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\s_dummy\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\s_dummy\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

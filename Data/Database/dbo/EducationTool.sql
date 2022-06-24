@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[EducationTool]
+(
+	[Id] INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	[Description] NVARCHAR(256) NOT NULL,
+	[ToolType] NVARCHAR(256) NOT NULL,
+	[MinAge] INT NOT NULL,
+	[MaxAge] INT NOT NULL,
+	[StartDate] DATETIME2 NOT NULL,
+	[EndDate] DATETIME2 NOT NULL,
+	[Price] FLOAT NOT NULL
+)

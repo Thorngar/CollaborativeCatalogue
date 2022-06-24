@@ -10212,9 +10212,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.csproj",
-      "projectName": "CollaborativeCatalogue.Presentation",
-      "projectPath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.csproj",
+      "projectUniqueName": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.Site.csproj",
+      "projectName": "CollaborativeCatalogue.Presentation.Site",
+      "projectPath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\CollaborativeCatalogue.Presentation.Site.csproj",
       "packagesPath": "C:\\Users\\s_dummy\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\s_dummy\\Documents\\GitHub\\CollaborativeCatalogue\\Presentation\\CollaborativeCatalogue.Presentation\\obj\\",
       "projectStyle": "PackageReference",

@@ -10,5 +10,6 @@ namespace CollaborativeCatalogue.Data.Providers.Sql
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<EducationTool> EducationTools { get; set; }
+        public DbSet<Thematic> Thematics { get; set; }
     }
 }

@@ -7,6 +7,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Transactions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -56,52 +60,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                 throw;
             }
         }
-
-        [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] UserUpdate userUpdate)
-        {
-            try
-            {
-                var userDb = await this.GetByEmail(userUpdate.Email);
-
-                if (userDb == null)
-                {
-                    return Unauthorized();
-                }
-
-                userDb.Name = userUpdate.Name;
-                userDb.Address = userUpdate.Address;
-                userDb.PhoneNumber = userUpdate.PhoneNumber;
-                userDb.WebsiteLink = userUpdate.WebsiteLink;
-
-                collaborativeCatalogueDbContext.Attach(userDb);
-                collaborativeCatalogueDbContext.Entry(userDb).State = EntityState.Modified;
-                await collaborativeCatalogueDbContext.SaveChangesAsync();
-
-                return this.Ok(userDb);
-            }
-            catch
-            {
-
-                return Unauthorized();
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
-        {
-            var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
-
-            if (dbUser == null)
-            {
-                return NotFound();
-            }
-
-            collaborativeCatalogueDbContext.Remove(dbUser);
-            await collaborativeCatalogueDbContext.SaveChangesAsync();
-            return Ok();
-        }
-
         [HttpPost]
         public async Task<ActionResult> Login(Credentials credentials)
         {
@@ -143,9 +101,71 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             return this.Ok(response);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync([FromBody] UserUpdate userUpdate)
+        {
+            try
+            {
+                var userDb = await this.GetByEmail(this.GetCurrentUser().Email);
+
+                if (userDb == null)
+                {
+                    return Unauthorized();
+                }
+                
+                userDb.Name = userUpdate.Name;
+                userDb.Address = userUpdate.Address;
+                userDb.PhoneNumber = userUpdate.PhoneNumber;
+                userDb.WebsiteLink = userUpdate.WebsiteLink;
+
+                collaborativeCatalogueDbContext.Attach(userDb);
+                collaborativeCatalogueDbContext.Entry(userDb).State = EntityState.Modified;
+                await collaborativeCatalogueDbContext.SaveChangesAsync();
+
+                return this.Ok(userDb);
+            }
+            catch 
+            {
+                return Unauthorized();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
+
+            if (dbUser == null)
+            {
+                return NotFound();
+            }
+
+            collaborativeCatalogueDbContext.Remove(dbUser);
+            await collaborativeCatalogueDbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+
+
         private async Task<User?> GetByEmail(string email)
         {
             return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        private CurrentUser GetCurrentUser()
+        {
+            var context = this.HttpContext.User.Claims;
+            CurrentUser currentUser = new CurrentUser();
+
+            if (context.Count() != 0)
+            {
+                currentUser.Id = Int32.Parse(context.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+                currentUser.Email = context.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+                currentUser.RoleId = Int32.Parse(context.FirstOrDefault(r => r.Type == ClaimTypes.Role).Value);
+                
+            }
+
+            return currentUser;
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)

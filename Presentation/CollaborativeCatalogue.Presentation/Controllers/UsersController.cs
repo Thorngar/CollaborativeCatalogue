@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using System.Transactions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -39,32 +40,28 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             user.Salt = Convert.ToBase64String(salt);
             user.Password = Convert.ToBase64String(hash);
 
-            var userCreate = this._mapper.Map<UserCore>(user);
-            userCreate.CreationDate = DateTime.Now;
-
             try
             {
-                using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    var userCreateReceive = await this._userRepository.CreateAsync(userCreate);
-                    await this._userRoleRepository.AddUserRoleAsync(new UserRoleCore
-                    {
-                        UserId = userCreateReceive.Id,
-                        RoleId = user.RoleGranted,
-                        AuthorOfChange = currentUser.ListRoles.Count != Constants.RoleConstants.NoConnectedUser ? currentUser.Email : user.Email
-                    });
-                    scope.Complete();
-                    return userCreateReceive;
-                }
+                collaborativeCatalogueDbContext.Attach(user);
+                await collaborativeCatalogueDbContext.SaveChangesAsync();
+                return Created("", user);
+                //using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                //{
+                //    var userCreateReceive = await this._userRepository.CreateAsync(userCreate);
+                //    await this._userRoleRepository.AddUserRoleAsync(new UserRoleCore
+                //    {
+                //        UserId = userCreateReceive.Id,
+                //        RoleId = user.RoleGranted,
+                //        AuthorOfChange = currentUser.ListRoles.Count != Constants.RoleConstants.NoConnectedUser ? currentUser.Email : user.Email
+                //    });
+                //    scope.Complete();
+                //    return userCreateReceive;
+                //}
             }
             catch (Exception e)
             {
-                throw new BusinessException($"{Constants.ExceptionMessages.ErrorCreateUserAndLinkWithRole}");
+                throw new Exception(e.Message);
             }
-
-            collaborativeCatalogueDbContext.Attach(user);
-            await collaborativeCatalogueDbContext.SaveChangesAsync();
-            return Created("", user);
         }
 
         [HttpPut("{id}")]

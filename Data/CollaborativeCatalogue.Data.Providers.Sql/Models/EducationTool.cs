@@ -13,6 +13,7 @@ namespace CollaborativeCatalogue.Data.Providers.Sql.Models
     {
         [Key]
         public int Id { get; set; }
+        public int UserId { get; set; }
         public string Name { get; set; }
         public string Subtitle { get; set; }
         public string Description { get; set; }

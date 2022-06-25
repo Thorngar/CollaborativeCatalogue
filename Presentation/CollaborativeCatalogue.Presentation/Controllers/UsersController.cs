@@ -27,7 +27,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         public UsersController(CollaborativeCatalogueDbContext collaborativeCatalogueDbContext, IConfiguration configuration)
         {
             this.collaborativeCatalogueDbContext = collaborativeCatalogueDbContext;
-            _configuration = configuration; 
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -60,7 +60,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                 throw;
             }
         }
-
         [HttpPost]
         public async Task<ActionResult> Login(Credentials credentials)
         {
@@ -180,6 +179,37 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
+        }
+
+        private async Task UpdatePassword(UserUpdatePassword user)
+        {
+            await this.ValidateOldPasswordAsync(user.Email, user.OldPassword);
+
+            (var hash, var salt) = EncryptionPassword(user.NewPassword);
+
+            user.Salt = Convert.ToBase64String(salt);
+            user.NewPassword = Convert.ToBase64String(hash);
+
+            await this.UpdatePassword(user);
+        }
+
+        private async Task<ActionResult> ValidateOldPasswordAsync(string email, string oldPassword)
+        {
+            var userDb = await this.GetByEmail(email);
+
+            if (userDb == null)
+            {
+                return this.BadRequest();
+            }
+
+            var hashToCompare = Decryption(oldPassword, userDb.Salt);
+
+            if (!userDb.Password.Equals(hashToCompare))
+            {
+                return this.BadRequest();
+            }
+
+            return this.Ok();
         }
 
         private (byte[], byte[]) EncryptionPassword(string password)

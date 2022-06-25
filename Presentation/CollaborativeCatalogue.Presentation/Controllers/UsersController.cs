@@ -111,7 +111,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         {
             var userDb = await this.GetByEmail(credentials.Email);
 
-            if(userDb == null)
+            if (userDb == null)
             {
                 return Unauthorized();
             }
@@ -131,7 +131,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Role, userDb.RoleId.ToString(), ClaimValueTypes.Integer32)
             };
-            
+
 
             var token = this.GetToken(authClaims);
 
@@ -145,6 +145,27 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             };
 
             return this.Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
+
+            if (dbUser == null)
+            {
+                return NotFound();
+            }
+
+            collaborativeCatalogueDbContext.Remove(dbUser);
+            await collaborativeCatalogueDbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+
+        private async Task<User?> GetByEmail(string email)
+        {
+            return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
 
         //[HttpPut]

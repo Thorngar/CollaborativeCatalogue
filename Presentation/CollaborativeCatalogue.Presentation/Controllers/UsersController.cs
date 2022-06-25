@@ -63,17 +63,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateAsync([FromBody] UserUpdate userUpdate)
         {
-            //var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
-
-            //if (dbUser == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //collaborativeCatalogueDbContext.Attach(user);
-            //await collaborativeCatalogueDbContext.SaveChangesAsync();
-            //return Ok();
-
             try
             {
                 var userDb = await this.GetByEmail(userUpdate.Email);
@@ -88,26 +77,12 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                 userDb.PhoneNumber = userUpdate.PhoneNumber;
                 userDb.WebsiteLink = userUpdate.WebsiteLink;
 
-                //var updatedUser = new User
-                //{
-                //    Id = userDb.Id,
-                //    Name = userUpdate.Name,
-                //    RoleId = userDb.RoleId,
-                //    Email = userDb.Email,
-                //    Password = userDb.Password,
-                //    Salt = userDb.Salt,
-                //    Address = userUpdate.Address,
-                //    PhoneNumber = userUpdate.PhoneNumber,
-                //    WebsiteLink = userUpdate.WebsiteLink
-                //};
-
                 collaborativeCatalogueDbContext.Attach(userDb);
                 collaborativeCatalogueDbContext.Entry(userDb).State = EntityState.Modified;
                 await collaborativeCatalogueDbContext.SaveChangesAsync();
 
                 return this.Ok(userDb);
             }
-
             catch 
             {
 

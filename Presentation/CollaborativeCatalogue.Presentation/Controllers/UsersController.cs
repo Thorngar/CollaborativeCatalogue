@@ -45,21 +45,42 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> CreateAsync([FromBody] User user)
         {
-            (var hash, var salt) = EncryptionPassword(user.Password);
-            user.Salt = Convert.ToBase64String(salt);
-            user.Password = Convert.ToBase64String(hash);
+            try { 
+                CurrentUser currentUser = this.GetCurrentUser();
 
-            try
-            {
-                collaborativeCatalogueDbContext.Attach(user);
-                await collaborativeCatalogueDbContext.SaveChangesAsync();
-                return Created("", user);
+                if(currentUser.RoleId == 1)
+                {
+                    (var hash, var salt) = EncryptionPassword(user.Password);
+                    user.Salt = Convert.ToBase64String(hash);
+                    user.Password = Convert.ToBase64String(salt);
+
+                    user.RoleId = 1;
+
+                    collaborativeCatalogueDbContext.Attach(user);
+                    await collaborativeCatalogueDbContext.SaveChangesAsync();
+                    return Created("", user);
+                }
+                else if(currentUser.RoleId == 0)
+                {
+                    (var hash, var salt) = EncryptionPassword(user.Password);
+                    user.Salt = Convert.ToBase64String(salt);
+                    user.Password = Convert.ToBase64String(hash);
+
+                    user.RoleId = 2;
+
+                    collaborativeCatalogueDbContext.Attach(user);
+                    await collaborativeCatalogueDbContext.SaveChangesAsync();
+                    return Created("", user);
+                }
+
+                return Unauthorized();
             }
             catch (Exception e)
             {
                 throw;
             }
         }
+
         [HttpPost]
         public async Task<ActionResult> Login(Credentials credentials)
         {
@@ -130,6 +151,27 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdatePasswordAsync(UserUpdatePassword user)
+        {
+            try
+            {
+                CurrentUser currentUser = this.GetCurrentUser();
+
+                if (currentUser.Email != user.Email)
+                {
+                    return this.Unauthorized();
+                }
+
+                await this.UpdatePassword(user);
+                return this.Ok();
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
+        }
+
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(int id)
         {
@@ -155,6 +197,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
 
             return Unauthorized();
         }
+
 
         private async Task<User?> GetByEmail(string email)
         {
@@ -188,27 +231,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> UpdatePasswordAsync(UserUpdatePassword user)
-        {
-            try
-            {
-                CurrentUser currentUser = this.GetCurrentUser();
-
-                if (currentUser.Email != user.Email)
-                {
-                    return this.Unauthorized();
-                }
-
-                await this.UpdatePassword(user);
-                return this.Ok();
-            }
-            catch (Exception e)
-            {
-                return this.BadRequest(e.Message);
-            }
         }
 
         private async Task UpdatePassword(UserUpdatePassword user)

@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[EducationTools]
 (
 	[Id] INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	[UserId] INT NOT NULL,
 	[Name] NVARCHAR(256) NOT NULL,
 	[Subtitle] NVARCHAR(256) NOT NULL,
 	[Description] NVARCHAR(256) NOT NULL,
@@ -13,4 +14,6 @@
 	[EndDate] DATETIME2 NOT NULL,
 	[Price] FLOAT NOT NULL,
 	[IsValidatedByAdmin] BIT NOT NULL DEFAULT(0)
+
+	CONSTRAINT [FK_EDUCATIONTOOLS_USERS] FOREIGN KEY (UserId) REFERENCES [dbo].[Users] ([Id]),
 )

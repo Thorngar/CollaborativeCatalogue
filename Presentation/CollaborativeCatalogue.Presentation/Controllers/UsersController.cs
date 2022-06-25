@@ -7,9 +7,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Transactions;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,7 +23,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         public UsersController(CollaborativeCatalogueDbContext collaborativeCatalogueDbContext, IConfiguration configuration)
         {
             this.collaborativeCatalogueDbContext = collaborativeCatalogueDbContext;
-            _configuration = configuration; 
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -83,7 +80,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
 
                 return this.Ok(userDb);
             }
-            catch 
+            catch
             {
 
                 return Unauthorized();
@@ -146,22 +143,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             return this.Ok(response);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
-        {
-            var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
-
-            if (dbUser == null)
-            {
-                return NotFound();
-            }
-
-            collaborativeCatalogueDbContext.Remove(dbUser);
-            await collaborativeCatalogueDbContext.SaveChangesAsync();
-            return Ok();
-        }
-
-
         private async Task<User?> GetByEmail(string email)
         {
             return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
@@ -178,6 +159,37 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
+        }
+
+        private async Task UpdatePassword(UserUpdatePassword user)
+        {
+            await this.ValidateOldPasswordAsync(user.Email, user.OldPassword);
+
+            (var hash, var salt) = EncryptionPassword(user.NewPassword);
+
+            user.Salt = Convert.ToBase64String(salt);
+            user.NewPassword = Convert.ToBase64String(hash);
+
+            await this.UpdatePassword(user);
+        }
+
+        private async Task<ActionResult> ValidateOldPasswordAsync(string email, string oldPassword)
+        {
+            var userDb = await this.GetByEmail(email);
+
+            if (userDb == null)
+            {
+                return this.BadRequest();
+            }
+
+            var hashToCompare = Decryption(oldPassword, userDb.Salt);
+
+            if (!userDb.Password.Equals(hashToCompare))
+            {
+                return this.BadRequest();
+            }
+
+            return this.Ok();
         }
 
         private (byte[], byte[]) EncryptionPassword(string password)

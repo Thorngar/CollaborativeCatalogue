@@ -130,22 +130,31 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
+            CurrentUser currentUser = this.GetCurrentUser();
 
-            if (dbUser == null)
+            if (currentUser.RoleId == 2 && currentUser.Id == id)
             {
-                return NotFound();
+                var userDb = await this.GetByEmail(currentUser.Email);
+
+                collaborativeCatalogueDbContext.Remove(userDb);
+                await collaborativeCatalogueDbContext.SaveChangesAsync();
+
+                return Ok();
+            } else if (currentUser.RoleId == 1)
+            {
+                var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
+
+                collaborativeCatalogueDbContext.Remove(dbUser);
+                await collaborativeCatalogueDbContext.SaveChangesAsync();
+
+                return Ok();
             }
 
-            collaborativeCatalogueDbContext.Remove(dbUser);
-            await collaborativeCatalogueDbContext.SaveChangesAsync();
-            return Ok();
+            return Unauthorized();
         }
-
-
 
         private async Task<User?> GetByEmail(string email)
         {

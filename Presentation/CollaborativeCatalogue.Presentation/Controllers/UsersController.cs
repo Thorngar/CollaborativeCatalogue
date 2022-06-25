@@ -151,6 +151,27 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdatePasswordAsync(UserUpdatePassword user)
+        {
+            try
+            {
+                CurrentUser currentUser = this.GetCurrentUser();
+
+                if (currentUser.Email != user.Email)
+                {
+                    return this.Unauthorized();
+                }
+
+                await this.UpdatePassword(user);
+                return this.Ok();
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
+        }
+
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(int id)
         {
@@ -176,6 +197,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
 
             return Unauthorized();
         }
+
 
         private async Task<User?> GetByEmail(string email)
         {
@@ -209,27 +231,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> UpdatePasswordAsync(UserUpdatePassword user)
-        {
-            try
-            {
-                CurrentUser currentUser = this.GetCurrentUser();
-
-                if (currentUser.Email != user.Email)
-                {
-                    return this.Unauthorized();
-                }
-
-                await this.UpdatePassword(user);
-                return this.Ok();
-            }
-            catch (Exception e)
-            {
-                return this.BadRequest(e.Message);
-            }
         }
 
         private async Task UpdatePassword(UserUpdatePassword user)

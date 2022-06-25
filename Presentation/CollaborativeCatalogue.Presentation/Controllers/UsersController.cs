@@ -10,6 +10,7 @@ using System.Text;
 using System.Transactions;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -146,6 +147,27 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             return this.Ok(response);
         }
 
+        //[HttpPut]
+        //public async Task<ActionResult> UpdatePasswordAsync(UserUpdatePassword user)
+        //{
+        //    try
+        //    {
+        //        CurrentUser currentUser = this.GetCurrentUser();
+
+        //        if (currentUser.Id != user.Id)
+        //        {
+        //            return this.Unauthorized();
+        //        }
+
+        //        await this.UpdatePasswordAsync(user);
+        //        return this.Ok();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return this.BadRequest(e.Message);
+        //    }
+        //}
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
@@ -159,6 +181,36 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                 );
         }
 
+        private async Task UpdatePassword(UserUpdatePassword user)
+        {
+            await this.ValidateOldPasswordAsync(user.Email, user.OldPassword);
+
+            (var hash, var salt) = EncryptionPassword(user.NewPassword);
+
+            user.Salt = Convert.ToBase64String(salt);
+            user.NewPassword = Convert.ToBase64String(hash);
+
+            await this.UpdatePasswordAsync(user);
+        }
+
+        private async Task<ActionResult> ValidateOldPasswordAsync(string email, string oldPassword)
+        {
+            var userDb = await this.GetByEmail(email);
+
+            if (userDb == null)
+            {
+                return this.BadRequest();
+            }
+
+            var hashToCompare = Decryption(oldPassword, userDb.Salt);
+
+            if (!userDb.Password.Equals(hashToCompare))
+            {
+                return this.BadRequest();
+            }
+
+            return this.Ok();
+        }
 
         private async Task<User?> GetByEmail(string email)
         {

@@ -60,6 +60,51 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync([FromBody] UserUpdate userUpdate)
+        {
+            try
+            {
+                var userDb = await this.GetByEmail(userUpdate.Email);
+
+                if (userDb == null)
+                {
+                    return Unauthorized();
+                }
+
+                userDb.Name = userUpdate.Name;
+                userDb.Address = userUpdate.Address;
+                userDb.PhoneNumber = userUpdate.PhoneNumber;
+                userDb.WebsiteLink = userUpdate.WebsiteLink;
+
+                collaborativeCatalogueDbContext.Attach(userDb);
+                collaborativeCatalogueDbContext.Entry(userDb).State = EntityState.Modified;
+                await collaborativeCatalogueDbContext.SaveChangesAsync();
+
+                return this.Ok(userDb);
+            }
+            catch 
+            {
+
+                return Unauthorized();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
+
+            if (dbUser == null)
+            {
+                return NotFound();
+            }
+
+            collaborativeCatalogueDbContext.Remove(dbUser);
+            await collaborativeCatalogueDbContext.SaveChangesAsync();
+            return Ok();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Login(Credentials credentials)
         {
@@ -99,21 +144,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             };
 
             return this.Ok(response);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, [FromBody] User user)
-        {
-            var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
-
-            if (dbUser == null)
-            {
-                return NotFound();
-            }
-
-            collaborativeCatalogueDbContext.Attach(user);
-            await collaborativeCatalogueDbContext.SaveChangesAsync();
-            return Ok();
         }
 
         [HttpDelete("{id}")]

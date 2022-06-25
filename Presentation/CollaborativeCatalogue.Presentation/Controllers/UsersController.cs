@@ -135,6 +135,21 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
 
+        private CurrentUser GetCurrentUser()
+        {
+            var context = this.HttpContext.User.Claims;
+            CurrentUser currentUser = new CurrentUser();
+
+            if (context.Count() != 0)
+            {
+                currentUser.Id = Int32.Parse(context.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+                currentUser.Email = context.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+                currentUser.RoleId = Int32.Parse(context.FirstOrDefault(r => r.Type == ClaimTypes.Role).Value);
+            }
+            return currentUser;
+        }
+
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));

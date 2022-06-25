@@ -63,9 +63,9 @@
     <None Include="Scripts\ThematicInsert.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\EducationTool.sql" />
-    <Build Include="dbo\Role.sql" />
-    <Build Include="dbo\Thematic.sql" />
-    <Build Include="dbo\User.sql" />
+    <Build Include="dbo\EducationTools.sql" />
+    <Build Include="dbo\Thematics.sql" />
+    <Build Include="dbo\Users.sql" />
+    <Build Include="dbo\Roles.sql" />
   </ItemGroup>
 </Project>

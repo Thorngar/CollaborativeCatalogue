@@ -33,7 +33,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         [HttpPost]
         public async Task<ActionResult<EducationTool>> CreateAsync([FromBody] EducationTool educationTool)
         {
-            collaborativeCatalogueDbContext.Attach(educationTool);
+            collaborativeCatalogueDbContext.EducationTools.Attach(educationTool);
             await collaborativeCatalogueDbContext.SaveChangesAsync();
             return Created("", educationTool);
         }

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[EducationTool]
+﻿CREATE TABLE [dbo].[EducationTools]
 (
 	[Id] INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	[Description] NVARCHAR(256) NOT NULL,

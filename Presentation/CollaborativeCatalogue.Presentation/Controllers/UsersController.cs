@@ -58,6 +58,47 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Login(Credentials credentials)
+        {
+            var userDb = await this.GetByEmail(credentials.Email);
+
+            if (userDb == null)
+            {
+                return Unauthorized();
+            }
+
+            this.Decryption(credentials.Password, userDb.Salt);
+            var hashToCompare = Decryption(credentials.Password, userDb.Salt);
+
+            if (!userDb.Password.Equals(hashToCompare))
+            {
+                return Unauthorized();
+            }
+
+            var authClaims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, userDb.Id.ToString()),
+                new Claim(ClaimTypes.Email, userDb.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, userDb.RoleId.ToString(), ClaimValueTypes.Integer32)
+            };
+
+
+            var token = this.GetToken(authClaims);
+
+            var response = new ConnectedUser
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiration = token.ValidTo,
+                Id = userDb.Id,
+                Email = userDb.Email,
+                Role = userDb.RoleId
+            };
+
+            return this.Ok(response);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(int id, [FromBody] User user)
         {
@@ -88,45 +129,10 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Login(Credentials credentials)
+
+        private async Task<User?> GetByEmail(string email)
         {
-            var userDb = await this.GetByEmail(credentials.Email);
-
-            if(userDb == null)
-            {
-                return Unauthorized();
-            }
-
-            this.Decryption(credentials.Password, userDb.Salt);
-            var hashToCompare = Decryption(credentials.Password, userDb.Salt);
-
-            if (!userDb.Password.Equals(hashToCompare))
-            {
-                return Unauthorized();
-            }
-
-            var authClaims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, userDb.Id.ToString()),
-                new Claim(ClaimTypes.Email, userDb.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, userDb.RoleId.ToString(), ClaimValueTypes.Integer32)
-            };
-            
-
-            var token = this.GetToken(authClaims);
-
-            var response = new ConnectedUser
-            {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expiration = token.ValidTo,
-                Id = userDb.Id,
-                Email = userDb.Email,
-                Role = userDb.RoleId
-            };
-
-            return this.Ok(response);
+            return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
@@ -140,12 +146,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
-        }
-
-
-        private async Task<User?> GetByEmail(string email)
-        {
-            return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
 
         private (byte[], byte[]) EncryptionPassword(string password)

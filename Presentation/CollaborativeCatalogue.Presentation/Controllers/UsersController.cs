@@ -181,8 +181,31 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                 );
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdatePasswordAsync(UserUpdatePassword user)
+        {
+            try
+            {
+                CurrentUser currentUser = this.GetCurrentUser();
+
+                if (currentUser.Email != user.Email)
+                {
+                    return this.Unauthorized();
+                }
+
+                await this.UpdatePassword(user);
+                return this.Ok();
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
+        }
+
         private async Task UpdatePassword(UserUpdatePassword user)
         {
+            var userDb = await this.GetByEmail(user.Email);
+
             await this.ValidateOldPasswordAsync(user.Email, user.OldPassword);
 
             (var hash, var salt) = EncryptionPassword(user.NewPassword);
@@ -190,7 +213,13 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             user.Salt = Convert.ToBase64String(salt);
             user.NewPassword = Convert.ToBase64String(hash);
 
-            await this.UpdatePassword(user);
+            userDb.Password = user.NewPassword;
+            userDb.Salt = user.Salt;
+
+            collaborativeCatalogueDbContext.Attach(userDb);
+            collaborativeCatalogueDbContext.Entry(userDb).State = EntityState.Modified;
+
+            await this.collaborativeCatalogueDbContext.SaveChangesAsync();
         }
 
         private async Task<ActionResult> ValidateOldPasswordAsync(string email, string oldPassword)
@@ -199,14 +228,14 @@ namespace CollaborativeCatalogue.Presentation.Controllers
 
             if (userDb == null)
             {
-                return this.BadRequest();
+                return Unauthorized();
             }
 
             var hashToCompare = Decryption(oldPassword, userDb.Salt);
 
             if (!userDb.Password.Equals(hashToCompare))
             {
-                return this.BadRequest();
+                return Unauthorized();
             }
 
             return this.Ok();

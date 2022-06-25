@@ -2,6 +2,9 @@
 using CollaborativeCatalogue.Data.Providers.Sql.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Transactions;
@@ -10,15 +13,18 @@ using System.Transactions;
 
 namespace CollaborativeCatalogue.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly CollaborativeCatalogueDbContext collaborativeCatalogueDbContext;
 
-        public UsersController(CollaborativeCatalogueDbContext collaborativeCatalogueDbContext)
+        private readonly IConfiguration _configuration;
+
+        public UsersController(CollaborativeCatalogueDbContext collaborativeCatalogueDbContext, IConfiguration configuration)
         {
             this.collaborativeCatalogueDbContext = collaborativeCatalogueDbContext;
+            _configuration = configuration; 
         }
 
         [HttpGet]
@@ -45,22 +51,10 @@ namespace CollaborativeCatalogue.Presentation.Controllers
                 collaborativeCatalogueDbContext.Attach(user);
                 await collaborativeCatalogueDbContext.SaveChangesAsync();
                 return Created("", user);
-                //using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-                //{
-                //    var userCreateReceive = await this._userRepository.CreateAsync(userCreate);
-                //    await this._userRoleRepository.AddUserRoleAsync(new UserRoleCore
-                //    {
-                //        UserId = userCreateReceive.Id,
-                //        RoleId = user.RoleGranted,
-                //        AuthorOfChange = currentUser.ListRoles.Count != Constants.RoleConstants.NoConnectedUser ? currentUser.Email : user.Email
-                //    });
-                //    scope.Complete();
-                //    return userCreateReceive;
-                //}
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw;
             }
         }
 
@@ -94,6 +88,65 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Login(Credentials credentials)
+        {
+            var userDb = await this.GetByEmail(credentials.Email);
+
+            if(userDb == null)
+            {
+                return Unauthorized();
+            }
+
+            this.Decryption(credentials.Password, userDb.Salt);
+            var hashToCompare = Decryption(credentials.Password, userDb.Salt);
+
+            if (!userDb.Password.Equals(hashToCompare))
+            {
+                return Unauthorized();
+            }
+
+            var authClaims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, userDb.Id.ToString()),
+                new Claim(ClaimTypes.Email, userDb.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, userDb.RoleId.ToString(), ClaimValueTypes.Integer32)
+            };
+            
+
+            var token = this.GetToken(authClaims);
+
+            var response = new ConnectedUser
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiration = token.ValidTo,
+                Id = userDb.Id,
+                Email = userDb.Email,
+                Role = userDb.RoleId
+            };
+
+            return this.Ok(response);
+        }
+
+        private JwtSecurityToken GetToken(List<Claim> authClaims)
+        {
+            var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+            return new JwtSecurityToken(
+                    issuer: _configuration["JWT:ValidIssuer"],
+                    audience: _configuration["JWT:ValidAudience"],
+                    expires: DateTime.Now.AddDays(1),
+                    claims: authClaims,
+                    signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
+                );
+        }
+
+
+        private async Task<User?> GetByEmail(string email)
+        {
+            return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
+        }
 
         private (byte[], byte[]) EncryptionPassword(string password)
         {

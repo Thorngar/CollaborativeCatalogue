@@ -7,10 +7,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Transactions;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text.RegularExpressions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,7 +23,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         public UsersController(CollaborativeCatalogueDbContext collaborativeCatalogueDbContext, IConfiguration configuration)
         {
             this.collaborativeCatalogueDbContext = collaborativeCatalogueDbContext;
-            _configuration = configuration; 
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -84,7 +80,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
 
                 return this.Ok(userDb);
             }
-            catch 
+            catch
             {
 
                 return Unauthorized();
@@ -147,47 +143,10 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             return this.Ok(response);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
-        {
-            var dbUser = await collaborativeCatalogueDbContext.Users.FindAsync(id);
-
-            if (dbUser == null)
-            {
-                return NotFound();
-            }
-
-            collaborativeCatalogueDbContext.Remove(dbUser);
-            await collaborativeCatalogueDbContext.SaveChangesAsync();
-            return Ok();
-        }
-
-
         private async Task<User?> GetByEmail(string email)
         {
             return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
-
-        //[HttpPut]
-        //public async Task<ActionResult> UpdatePasswordAsync(UserUpdatePassword user)
-        //{
-        //    try
-        //    {
-        //        CurrentUser currentUser = this.GetCurrentUser();
-
-        //        if (currentUser.Id != user.Id)
-        //        {
-        //            return this.Unauthorized();
-        //        }
-
-        //        await this.UpdatePasswordAsync(user);
-        //        return this.Ok();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return this.BadRequest(e.Message);
-        //    }
-        //}
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
@@ -211,7 +170,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             user.Salt = Convert.ToBase64String(salt);
             user.NewPassword = Convert.ToBase64String(hash);
 
-            await this.UpdatePasswordAsync(user);
+            await this.UpdatePassword(user);
         }
 
         private async Task<ActionResult> ValidateOldPasswordAsync(string email, string oldPassword)
@@ -231,11 +190,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             }
 
             return this.Ok();
-        }
-
-        private async Task<User?> GetByEmail(string email)
-        {
-            return await this.collaborativeCatalogueDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
 
         private (byte[], byte[]) EncryptionPassword(string password)

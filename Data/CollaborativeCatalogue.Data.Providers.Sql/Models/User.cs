@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CollaborativeCatalogue.Data.Providers.Sql.Models
 {
-    [Table("User", Schema = "dbo")]
+    [Table("Users", Schema = "dbo")]
     public class User
     {
         [Key]

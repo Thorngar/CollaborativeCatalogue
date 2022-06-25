@@ -21,39 +21,9 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         }
 
         //[HttpPost]
-        //public async Task<IActionResult> Login(Credentials credentials)
+        //public async Task<ActionResult> Login(Credentials credentials)
         //{
-        //    (var userData, var roleList) = await this._userDomain.Login(credentials);
-
-        //    if (userData == null)
-        //    {
-        //        return this.Unauthorized();
-        //    }
-
-        //    var authClaims = new List<Claim>
-        //    {
-        //        new Claim(ClaimTypes.NameIdentifier, userData.Id.ToString()),
-        //        new Claim(ClaimTypes.Email, userData.Email),
-        //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        //    };
-
-        //    foreach (var role in roleList)
-        //    {
-        //        authClaims.Add(new Claim(ClaimTypes.Role, role));
-        //    }
-
-        //    var token = this.GetToken(authClaims);
-
-        //    var response = new ConnectedUser
-        //    {
-        //        Token = new JwtSecurityTokenHandler().WriteToken(token),
-        //        Expiration = token.ValidTo,
-        //        Id = userData.Id,
-        //        Email = userData.Email,
-        //        Roles = roleList
-        //    };
-
-        //    return this.Ok(response);
+        //   var userDb = this.collaborativeCatalogueDbContext.Users.AsNoTracking()
         //}
 
         [HttpGet]

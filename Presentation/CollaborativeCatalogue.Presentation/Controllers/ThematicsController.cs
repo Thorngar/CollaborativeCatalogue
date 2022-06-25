@@ -5,6 +5,8 @@ using System.Data.Entity;
 
 namespace CollaborativeCatalogue.Presentation.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ThematicsController : ControllerBase
     {
         private readonly CollaborativeCatalogueDbContext collaborativeCatalogueDbContext;

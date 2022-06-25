@@ -7,5 +7,6 @@
 	[MaxAge] INT NOT NULL,
 	[StartDate] DATETIME2 NOT NULL,
 	[EndDate] DATETIME2 NOT NULL,
-	[Price] FLOAT NOT NULL
+	[Price] FLOAT NOT NULL,
+	[IsValidatedByAdmin] BIT NOT NULL DEFAULT(0)
 )

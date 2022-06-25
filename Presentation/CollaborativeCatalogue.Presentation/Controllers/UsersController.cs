@@ -23,12 +23,6 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             this.collaborativeCatalogueDbContext = collaborativeCatalogueDbContext;
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult> Login(Credentials credentials)
-        //{
-        //   var userDb = this.collaborativeCatalogueDbContext.Users.AsNoTracking()
-        //}
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllAsync()
         {

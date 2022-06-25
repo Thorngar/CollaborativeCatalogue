@@ -45,21 +45,42 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> CreateAsync([FromBody] User user)
         {
-            (var hash, var salt) = EncryptionPassword(user.Password);
-            user.Salt = Convert.ToBase64String(salt);
-            user.Password = Convert.ToBase64String(hash);
+            try { 
+                CurrentUser currentUser = this.GetCurrentUser();
 
-            try
-            {
-                collaborativeCatalogueDbContext.Attach(user);
-                await collaborativeCatalogueDbContext.SaveChangesAsync();
-                return Created("", user);
+                if(currentUser.RoleId == 1)
+                {
+                    (var hash, var salt) = EncryptionPassword(user.Password);
+                    user.Salt = Convert.ToBase64String(hash);
+                    user.Password = Convert.ToBase64String(salt);
+
+                    user.RoleId = 1;
+
+                    collaborativeCatalogueDbContext.Attach(user);
+                    await collaborativeCatalogueDbContext.SaveChangesAsync();
+                    return Created("", user);
+                }
+                else if(currentUser.RoleId == 0)
+                {
+                    (var hash, var salt) = EncryptionPassword(user.Password);
+                    user.Salt = Convert.ToBase64String(salt);
+                    user.Password = Convert.ToBase64String(hash);
+
+                    user.RoleId = 2;
+
+                    collaborativeCatalogueDbContext.Attach(user);
+                    await collaborativeCatalogueDbContext.SaveChangesAsync();
+                    return Created("", user);
+                }
+
+                return Unauthorized();
             }
             catch (Exception e)
             {
                 throw;
             }
         }
+
         [HttpPost]
         public async Task<ActionResult> Login(Credentials credentials)
         {

@@ -8,6 +8,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Transactions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

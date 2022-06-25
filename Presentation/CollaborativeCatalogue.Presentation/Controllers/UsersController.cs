@@ -2,6 +2,8 @@
 using CollaborativeCatalogue.Data.Providers.Sql.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,6 +19,42 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         {
             this.collaborativeCatalogueDbContext = collaborativeCatalogueDbContext;
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Login(Credentials credentials)
+        //{
+        //    (var userData, var roleList) = await this._userDomain.Login(credentials);
+
+        //    if (userData == null)
+        //    {
+        //        return this.Unauthorized();
+        //    }
+
+        //    var authClaims = new List<Claim>
+        //    {
+        //        new Claim(ClaimTypes.NameIdentifier, userData.Id.ToString()),
+        //        new Claim(ClaimTypes.Email, userData.Email),
+        //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        //    };
+
+        //    foreach (var role in roleList)
+        //    {
+        //        authClaims.Add(new Claim(ClaimTypes.Role, role));
+        //    }
+
+        //    var token = this.GetToken(authClaims);
+
+        //    var response = new ConnectedUser
+        //    {
+        //        Token = new JwtSecurityTokenHandler().WriteToken(token),
+        //        Expiration = token.ValidTo,
+        //        Id = userData.Id,
+        //        Email = userData.Email,
+        //        Roles = roleList
+        //    };
+
+        //    return this.Ok(response);
+        //}
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllAsync()

@@ -173,7 +173,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
             var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
             return new JwtSecurityToken(
-                    //issuer: _configuration["JWT:ValidIssuer"],
+                    issuer: _configuration["JWT:ValidIssuer"],
                     audience: _configuration["JWT:ValidAudience"],
                     expires: DateTime.Now.AddDays(1),
                     claims: authClaims,

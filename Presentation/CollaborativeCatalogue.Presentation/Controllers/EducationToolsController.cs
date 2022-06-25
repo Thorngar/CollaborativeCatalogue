@@ -33,6 +33,7 @@ namespace CollaborativeCatalogue.Presentation.Controllers
         [HttpPost]
         public async Task<ActionResult<EducationTool>> CreateAsync([FromBody] EducationTool educationTool)
         {
+            educationTool.IsValidatedByAdmin = false;
             collaborativeCatalogueDbContext.EducationTools.Attach(educationTool);
             await collaborativeCatalogueDbContext.SaveChangesAsync();
             return Created("", educationTool);

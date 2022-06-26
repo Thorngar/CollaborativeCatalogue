@@ -68,8 +68,8 @@ const ConnectForm = () => {
               type="password"
               name="password"
               id=""
-              placeholder=""
-              className="w-80 mt-4 px-2 py-1 mb-1 mt-2  rounded focus:outline-none focus:ring-2 focus:ring-[#755342] block"
+              placeholder="Password"
+              className="w-80 mt-4 px-2 py-1 mb-1   rounded focus:outline-none focus:ring-2 focus:ring-[#755342] block"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />

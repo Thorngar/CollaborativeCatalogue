@@ -86,7 +86,7 @@ const FormTool = () => {
         backgroundImage: `url("https://www.ilesdepaix.org/wp-content/uploads/2021/10/51004205535_5fef2f89f3_o-1600x900.jpg")`,
       }}
     >
-      <div className="flex flex-col bg-[#efdddc] w-3/2 justify-center p-4 rounded-md text-gray-800 items-center mt-2 border-2 border-[#755342] opacity-95">
+      <div className="flex flex-col bg-[#efdddc] w-3/2 justify-center p-4 rounded-md text-gray-800 items-center my-2 border-2 border-[#755342] opacity-95">
         <h1 className="my-8 text-3xl font-bold underline text-center">
           Formulaire d'outil
         </h1>

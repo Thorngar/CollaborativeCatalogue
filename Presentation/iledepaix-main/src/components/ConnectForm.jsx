@@ -24,6 +24,7 @@ const ConnectForm = () => {
     onSubmit: (values) => {
       console.log(values);
       login(values.email, values.password);
+
       setIsConnect(true);
       navigate(`/Page`);
     },

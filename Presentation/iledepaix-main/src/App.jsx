@@ -47,9 +47,8 @@ function App() {
                 path="UpdatePasswordForm"
                 element={<UpdatePasswordForm />}
               />
-              <Route path="/" element={HomePage}></Route>
             </Routes>
-           
+            <HomePage/>
           </main>
         </div>
         <Footer />

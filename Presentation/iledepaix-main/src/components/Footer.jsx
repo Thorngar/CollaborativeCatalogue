@@ -1,7 +1,9 @@
 const Footer = () => {
   return (
-    <div className="bg-[#b27d71]">
-      <ul className="flex">
+    <div className="relative"> 
+
+    <nav className="bg-[#b27d71]">
+      <ul className=" flex justify-end">
         <li>
           <a href="https://www.facebook.com/ilesdepaix">
             <svg
@@ -82,13 +84,13 @@ const Footer = () => {
             </svg>
           </a>
         </li>
+        <li>
+
+      
+        </li>
       </ul>
-      <span className="font-semi-bold">
-        <a href="https://www.ilesdepaix.org/agir/jobs-et-stages/">
-          Jobs et stages
-        </a>
-      </span>
-    </div>
+    </nav>
+                </div>
   );
 };
 export default Footer;

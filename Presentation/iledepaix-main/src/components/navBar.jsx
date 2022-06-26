@@ -9,9 +9,9 @@ const NavBar = ({ title, children, currentPage }) => {
     "https://www.telesambre.be/sites/telesambre.easydev.be/files/articles/IDP_LOGO_POS-24-CMYK_0.jpg";
 
   return (
-    <div>
+    <div className="relative">
       <header className="flex p-4 bg-[#efdddc]">
-        <nav className="flex justify-around font-bold w-full">
+        <nav className="flex justify-around font-bold w-full sticky top-0">
           <div className="flex items-center">
             <a href="/">
               <img

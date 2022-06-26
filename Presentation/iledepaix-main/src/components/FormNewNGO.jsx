@@ -6,7 +6,7 @@ const FormNewNGO = () => {
   const [error] = useState(null);
   const onChange = "";
   return (
-    <div className="flex justify-center mt-8 backgroundImage[hero-pattern]">
+    <div className="flex justify-center mt-8 ">
       <div className=" bg-[#CBABA2] justify-center p-4 rounded text-black">
         <h1 className="my-8 text-3xl font-medium pl-6">
           Formulaire d'inscription ONG

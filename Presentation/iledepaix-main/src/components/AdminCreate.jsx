@@ -1,7 +1,7 @@
 const AdminCreate = () => {
   return (
     <div
-      className="flex h-screen"
+      className="flex h-screen bg-repeat-round"
       style={{
         backgroundImage: `url("https://www.ilesdepaix.org/wp-content/uploads/2021/10/Perou-2-1600x900.jpg")`,
       }}

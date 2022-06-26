@@ -25,8 +25,10 @@ function App() {
   return (
     <IsConnectContext.Provider value={contextConnect}>
       <Router>
+        <div className="flex flex-col justify-around h-full">
+
         <div className="App">
-          <NavBar>
+          <NavBar >
             {" "}
             <div id="navBar">
               <Sidebar pageWrapId={"pushRotate"} outerContainerId={"navBar"} />
@@ -49,7 +51,11 @@ function App() {
             </Routes>
           </main>
         </div>
+        <div>
+
         <Footer />
+        </div>
+        </div>
       </Router>
     </IsConnectContext.Provider>
   );

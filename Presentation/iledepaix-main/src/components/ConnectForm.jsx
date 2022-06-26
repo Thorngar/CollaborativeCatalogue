@@ -31,7 +31,7 @@ const ConnectForm = () => {
 
   return (
     <div
-      className="flex justify-center h-screen"
+      className="flex justify-center h-screen bg-repeat-round"
       style={{
         backgroundImage: `url("https://www.ilesdepaix.org/wp-content/uploads/2021/09/idp_banner_default-1600x900.jpg")`,
       }}
@@ -68,7 +68,7 @@ const ConnectForm = () => {
               type="password"
               name="password"
               id=""
-              placeholder=""
+              placeholder="Password"
               className="w-80 mt-4 px-2 py-1 my-2 rounded focus:outline-none focus:ring-2 focus:ring-[#755342] block"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

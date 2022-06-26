@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div className="bg-[#b27d71]">
-      <ul className="flex">
+      <ul className="flex justify-end">
         <li>
           <a href="https://www.facebook.com/ilesdepaix">
             <svg
@@ -83,11 +83,7 @@ const Footer = () => {
           </a>
         </li>
       </ul>
-      <span className="font-semi-bold">
-        <a href="https://www.ilesdepaix.org/agir/jobs-et-stages/">
-          Jobs et stages
-        </a>
-      </span>
+      
     </div>
   );
 };

@@ -14,6 +14,7 @@ import FormNewNGO from "./components/FormNewNGO";
 import ListInfo from "./components/ListInfo";
 import UpdatePasswordForm from "./components/UpdatePasswordForm";
 import Footer from "./components/Footer";
+import HomePage from "./components/HomePage";
 
 function App() {
   const [isConnect, setIsConnect] = useState(false);
@@ -47,6 +48,7 @@ function App() {
                 element={<UpdatePasswordForm />}
               />
             </Routes>
+            <HomePage/>
           </main>
         </div>
         <Footer />

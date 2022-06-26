@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:7015/api/users/";
+const API_URL = "https://localhost:7015/api/users/";
 class AuthService {
   login(email, password) {
     console.log(email, password);
@@ -11,11 +11,12 @@ class AuthService {
         password,
       })
       .then((response) => {
+        
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
         return response.data;
-      });
+      }).catch(err => {console.log(err);});
     // Le bakc se présentera p-e comme ceci
     /**
      * {

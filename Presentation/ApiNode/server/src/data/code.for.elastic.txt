@@ -1,0 +1,70 @@
+PUT /tools_mapping/
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "rebuilt_standard": {
+        "tokenizer": "standard",
+        "filter": [
+          "lowercase"
+          ]
+        }
+      }
+    }
+  },
+     "mappings": {
+    "dynamic":"strict",
+    "properties": {
+      "id": {
+        "type": "text"
+      },
+      "title": {
+        "type": "text"
+      },
+      "type": {
+        "type": "text"
+      },
+      "description": {
+        "type": "text"
+      },
+      "theme": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+GET /tools_mapping/
+
+POST /tools_mapping/_doc
+{
+  "id": "999",
+  "title": "title test",
+  "type": "type",
+  "description": "description test",
+  "theme": "theme test"
+}
+POST /tools_mapping/_doc
+{
+  "id": "888",
+  "title": "coca test",
+  "type": "coca",
+  "description": "coca test",
+  "theme": "coca test"
+}
+POST /tools_mapping/_doc
+{
+  "id": "777",
+  "title": "lisa test",
+  "type": "lisa",
+  "description": "lisa test",
+  "theme": "lisa test"
+}
+
+POST /tools_mapping/_analyze
+{
+  "tokenizer": "standard",
+  "filter":  [ "lowercase", "asciifolding" ],
+}
+
+

@@ -1,0 +1,44 @@
+{
+"settings": {
+    "analysis": {
+      "analyzer": {
+        "rebuilt_standard": {
+        "tokenizer": "standard",
+        "filter": [
+          "lowercase"
+          ]
+        }
+      }
+    }
+  },
+     "mappings": {
+    "dynamic":"strict",
+    "properties": {
+      "asso_name": {
+        "type": "text"
+      },
+      "title": {
+        "type": "text"
+      },
+      "type": {
+        "type": "text"
+      },
+      "description": {
+        "type": "text"
+      },
+      "theme": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+//POST DATA
+// POST /tools_mapping/_doc
+// {
+//   "asso_name": "ile de paix",
+//   "title": "title de test",
+//   "type": "lapin",
+//   "description": "j aime la biere",
+//   "theme": "noir"
+// }

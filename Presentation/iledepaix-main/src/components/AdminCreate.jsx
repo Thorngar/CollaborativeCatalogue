@@ -17,7 +17,7 @@ const AdminCreate = () => {
             name=""
             id=""
             placeholder="Name"
-            className="px-2 py-1 my-2 rounded focus:outline-none focus:ring-2 focus:ring-[#755342] block"
+            className="px-2 py-1 mt-2 rounded focus:outline-none focus:ring-2 focus:ring-[#755342] block"
           />
           <span className=" mt-2">Email:</span>
           <input
@@ -25,7 +25,7 @@ const AdminCreate = () => {
             name=""
             id=""
             placeholder="Email"
-            className="px-2 py-1 my-2 rounded focus:outline-none focus:ring-2 focus:ring-[#755342] block"
+            className="px-2 py-1 mt-2 rounded focus:outline-none focus:ring-2 focus:ring-[#755342] block"
           />
           <span className=" mt-2">Mot de passe:</span>
           <input
@@ -35,7 +35,7 @@ const AdminCreate = () => {
             placeholder="Password"
             className="px-2 py-1 my-2 rounded focus:outline-none focus:ring-2 focus:ring-[#755342] block"
           />
-          <button className="bg-[#b27d71] hover:bg-[#755342] p-2 mt-4 w-48 rounded text-white">
+          <button className="bg-[#b27d71] hover:bg-[#755342] p-2 my-4 w-48 rounded text-white">
             Ajouter
           </button>
         </form>
@@ -45,4 +45,3 @@ const AdminCreate = () => {
 };
 
 export default AdminCreate;
-
